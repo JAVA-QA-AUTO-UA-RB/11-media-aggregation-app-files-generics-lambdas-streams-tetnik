@@ -1,0 +1,21 @@
+Title;Artist;Genre;Duration;Rating
+Shape of You;Ed Sheeran;Pop;240;9
+Smells Like Teen Spirit;Nirvana;Rock;301;10
+Blinding Lights;The Weeknd;Pop;200;8
+One More Time;Daft Punk;Electronic;320;9
+Lose Yourself;Eminem;HipHop;326;10
+Billie Jean;Michael Jackson;Pop;294;10
+Thunderstruck;ACDC;Rock;292;9
+Rolling in the Deep;Adele;Pop;228;8
+Sandstorm;Darude;Electronic;220;9
+Bohemian Rhapsody;Queen;Rock;355;10
+Uptown Funk;Bruno Mars;Pop;270;9
+Numb;Linkin Park;Rock;216;8
+Hey Ya!;Outkast;HipHop;235;8
+Levels;Avicii;Electronic;210;9
+Hotel California;Eagles;Rock;391;10
+Poker Face;Lady Gaga;Pop;240;8
+Stronger;Kanye West;HipHop;312;9
+Wake Me Up;Avicii;Electronic;247;9
+Sweet Child O' Mine;Guns N' Roses;Rock;356;10
+Halo;Beyonce;Pop;261;9

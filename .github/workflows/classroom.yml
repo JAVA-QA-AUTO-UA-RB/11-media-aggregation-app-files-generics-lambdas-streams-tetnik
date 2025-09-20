@@ -1,0 +1,86 @@
+name: Autograding
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  compile:
+    name: Compile project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17 (Corretto)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Compile sources
+        run: |
+          mkdir -p out
+          javac -d out $(find src -name "*.java")
+
+  run:
+    name: Run MediaProcessor
+    runs-on: ubuntu-latest
+    needs: compile
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17 (Corretto)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+
+      - name: Compile sources
+        run: |
+          mkdir -p out
+          javac -d out $(find src -name "*.java")
+
+      - name: Run MediaProcessor
+        run: |
+          cd out
+          java com.example.media.app.MediaProcessor
+
+  check-tracks:
+    name: Validate tracks_output.txt
+    runs-on: ubuntu-latest
+    needs: run
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check tracks_output.txt exists and not empty
+        run: |
+          if [ ! -s out/tracks_output.txt ]; then
+            echo "❌ tracks_output.txt not found or empty"
+            exit 1
+          fi
+
+      - name: Validate tracks_output.txt contains Tracks count
+        run: |
+          grep -q "Tracks count:" out/tracks_output.txt || (echo "❌ Missing 'Tracks count:'" && exit 1)
+          echo "✅ tracks_output.txt contains 'Tracks count:'"
+
+  check-videos:
+    name: Validate videos_output.txt
+    runs-on: ubuntu-latest
+    needs: run
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check videos_output.txt exists and not empty
+        run: |
+          if [ ! -s out/videos_output.txt ]; then
+            echo "❌ videos_output.txt not found or empty"
+            exit 1
+          fi
+
+      - name: Validate videos_output.txt contains Videos count
+        run: |
+          grep -q "Videos count:" out/videos_output.txt || (echo "❌ Missing 'Videos count:'" && exit 1)
+          echo "✅ videos_output.txt contains 'Videos count:'"

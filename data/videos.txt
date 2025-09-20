@@ -1,0 +1,21 @@
+Title;Channel;Category;Duration;Views
+Top 10 Java Tips;CodeAcademy;Education;600;25000
+Funny Cats Compilation;AnimalFun;Entertainment;420;1000000
+Epic Fails;FunHub;Entertainment;300;500000
+Java Streams Explained;CodeAcademy;Education;480;40000
+History of Rock Music;MusicWorld;Education;900;120000
+Best Football Goals;SportsLive;Sports;540;750000
+Cooking Pasta Like a Pro;ChefMax;Food;360;85000
+Top 5 Space Discoveries;ScienceDaily;Education;720;220000
+Standup Comedy Night;ComedyHub;Entertainment;660;450000
+Ultimate Workout;FitnessPro;Sports;600;310000
+Machine Learning Basics;TechWorld;Education;840;130000
+Street Food Tour;ChefMax;Food;480;95000
+Top 10 NBA Dunks;SportsLive;Sports;420;500000
+Gaming Highlights;GameZone;Entertainment;540;600000
+Healthy Breakfast Ideas;ChefMax;Food;300;70000
+Physics Explained;ScienceDaily;Education;780;200000
+Standup Special;ComedyHub;Entertainment;720;520000
+World Cup Moments;SportsLive;Sports;660;880000
+AI in Everyday Life;TechWorld;Education;900;150000
+Funny Dogs Compilation;AnimalFun;Entertainment;360;900000
