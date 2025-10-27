@@ -23,13 +23,13 @@ public class Video extends Media {
         return category;
     }
 
-    public int getViews() {
+    public long getViews() {
         return views;
     }
 
     @Override
     public String toString() {
         // TODO: Return string with title, channel, category, views
-        return super.toString();
+        return title + " — " + channel + " (" + category + "), " + views + " views";
     }
 }

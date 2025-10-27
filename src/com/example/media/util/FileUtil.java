@@ -3,6 +3,8 @@ package com.example.media.util;
 import com.example.media.classes.Track;
 import com.example.media.classes.Video;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +54,37 @@ public class FileUtil {
      */
     public static List<Track> readTracks(String filename) throws IOException {
         List<Track> tracks = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            boolean isFirst = true; // пропустити заголовок
+
+            while ((line = br.readLine()) != null) {
+                if (isFirst) {
+                    isFirst = false;
+                    continue;
+                }
+
+                String[] parts = line.split(";");
+                if (parts.length < 5) continue; // пропускаємо некоректні рядки
+
+                String title = parts[0].trim();
+                String artist = parts[1].trim();
+                String genre = parts[2].trim();
+                int duration = Integer.parseInt(parts[3].trim());
+                int rating = Integer.parseInt(parts[4].trim());
+
+                tracks.add(new Track(title, artist, genre, duration, rating));
+            }
+        }
+
+        return tracks;
         // TODO: зчитати рядки з файлу
         // TODO: пропустити перший рядок (headers)
         // TODO: для кожного рядка розбити його на частини (split(";"))
         // TODO: створити новий Track(...) і додати у список
-        return tracks;
-    }
 
+    }
     /**
      * Зчитує список відео із файлу.
      *
@@ -84,11 +110,43 @@ public class FileUtil {
      */
     public static List<Video> readVideos(String filename) throws IOException {
         List<Video> videos = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine(); // пропускаємо заголовок
+            if (line == null) return videos;
+
+            int lineNo = 1;
+            while ((line = br.readLine()) != null) {
+                lineNo++;
+                line = line.trim();
+                if (line.isEmpty()) continue;
+
+                String[] parts = line.split(";");
+                if (parts.length != 5) {
+                    System.err.println("Skipping malformed video line " + lineNo + ": " + line);
+                    continue;
+                }
+
+                String title = parts[0].trim();
+                String channel = parts[1].trim();
+                String category = parts[2].trim();
+                String durationStr = parts[3].trim();
+                String viewsStr = parts[4].trim();
+
+                try {
+                    int duration = Integer.parseInt(durationStr);
+                    int views = Integer.parseInt(viewsStr);
+                    videos.add(new Video(title, channel, category, duration, views));
+                } catch (NumberFormatException ex) {
+                    System.err.println("Skipping video (number parse error) line " + lineNo + ": " + line);
+                }
+            }
+        }
+        return videos;
         // TODO: зчитати рядки з файлу
         // TODO: пропустити перший рядок (headers)
         // TODO: для кожного рядка розбити його на частини (split(";"))
         // TODO: створити новий Video(...) і додати у список
-        return videos;
     }
 }
 
